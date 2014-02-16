@@ -25,8 +25,12 @@
                 fontClosed       : '1em',
                 expandAllText    : '+ expand all',
                 collapseAllText  : '- collapse all'
-            }, settings = $.extend(defaults, options), // popular way to extend a existing set of data
-            key, p, $value, $tlEvent = $(settings.timelineContainer + " " + ".timelineEvent");
+            },
+            settings = $.extend(defaults, options), // popular way to extend a existing set of data
+            key,
+            p,
+            $value,
+            $tlEvent = $(settings.timelineContainer + " " + ".timelineEvent");
 
         function openEvent(eventHeading, eventBody) {
             $(eventHeading).removeClass('closed').addClass('open').animate({ fontSize: settings.fontOpen }, settings.baseSpeed);
@@ -67,7 +71,8 @@
 
         // Minor Event Click
         $(settings.timelineContainer).on("click", ".timelineMinor dt", function () {
-            var $this = $(this), currentId = $this.attr('id');
+            var $this = $(this),
+                currentId = $this.attr('id');
             // if the event is currently open
             if ($this.find('a').is('.open')) {
                 closeEvent($("a", this), $("#" + currentId + "EX")); // missing semicolon
@@ -79,8 +84,13 @@
         // Major Marker Click
         $(settings.timelineContainer).on("click", ".timelineMajorMarker", function () {
             // Mark: Lots of retyping the same stuff.  Simplify (Less JQuery Churn).
-            var $this = $(this), $tlMajor = $this.parents(".timelineMajor"), $tlMM = $tlMajor.find("dt a", "dl.timelineMinor"), $tlEvent = $tlMajor.find(".timelineEvent"), // number of minor events under this major event
-                numEvents = $tlMajor.find(".timelineMinor").length, numOpen = $tlMajor.find('.open').length; // number of minor events already open
+            var $this = $(this),
+                $tlMajor = $this.parents(".timelineMajor"),
+                $tlMM = $tlMajor.find("dt a", "dl.timelineMinor"),
+                $tlEvent = $tlMajor.find(".timelineEvent"),
+                 // number of minor events under this major event
+                numEvents = $tlMajor.find(".timelineMinor").length,
+                numOpen = $tlMajor.find('.open').length; // number of minor events already open
             if (numEvents > numOpen) {
                 openEvent($tlMM, $tlEvent);
             } else {
@@ -109,15 +119,14 @@
      */
     $.timeliner = function (options) {
         if ($.timeliners === undefined) { // prior was sloppy
-            $.timeliners = { options:
-                [
-                ] };
+            $.timeliners = { options: [] };
             $.timeliners.options.push(options);
         } else {
             $.timeliners.options.push(options);
         }
         $(document).ready(function () {
-            var i = 0, len = $.timeliners.options.length;
+            var i = 0,
+                len = $.timeliners.options.length;
             while (i < len) { // while is faster (JSPerf).
                 startTimeliner($.timeliners.options[i]);
                 i += 1;
