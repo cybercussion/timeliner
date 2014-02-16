@@ -101,7 +101,10 @@
         // All Markers/Events
         $(settings.timelineContainer + " " + ".expandAll").click(function () {
             // Mark: Lots of retyping the same stuff.  Simplify (Less JQuery Churn).
-            var $this = $(this), $tlC = $this.parents(settings.timelineContainer), $tlMinor = $tlC.find("dt a", "dl.timelineMinor"), $tlEvent = $tlC.find(".timelineEvent");
+            var $this = $(this),
+                $tlC = $this.parents(settings.timelineContainer),
+                $tlMinor = $tlC.find("dt a", "dl.timelineMinor"),
+                $tlEvent = $tlC.find(".timelineEvent");
             if ($(this).hasClass('expanded')) {
                 closeEvent($tlMinor, $tlEvent);
                 $(this).removeClass('expanded').html(settings.expandAllText);
